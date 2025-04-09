@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa-verso</title>
+    <link rel="shortcut icon" href="miles-swinging-1_ver_1.png" type="image/x-icon">
+   
+    <style>
+     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+
+body{
+    background-image: url(corna.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0;
+    margin: 15px;
+}
+
+h1{
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    color: aliceblue;
+    
+}
+    
+
+
+ol>li{
+text-align: center;
+color: aliceblue;
+align-items: center;
+display: flex;
+flex-direction: column;
+font-family: "Dancing Script", cursive;
+font-size: xx-large;
+border: 0;
+margin: 30px;
+margin-bottom: 40px;
+padding: 0px 0px 0px 0px;
+}
+
+input{
+    background-color: rgb(0, 0, 0);
+    color: black;
+
+  border: 3px solid blanchedalmond;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+button{
+    background-color: rgb(0, 0, 0);
+    color: rgb(241, 241, 241);
+    border: 0;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  border: 3px solid blanchedalmond;
+}
+
+.excluir{
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+   
+}
+select{
+    border-radius: 15px;
+   cursor: pointer;
+   color: white;
+   background-color: black;
+   font-family: "Special Gothic Expanded One", sans-serif;
+   font-weight: 100;
+   font-style: normal;
+   border: 3px solid blanchedalmond;
+}
+
+button:hover{
+    background-color: rgb(0, 0, 0);
+}
+
+
+
+::placeholder{
+    color: rgb(255, 255, 255);
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+      
+
+        <h1>Lista de Tarefas</h1>
+
+        <!-- <form action="http://localhost:8080/tarefa" method="POST"> -->
+        <input type="text" placeholder="Digite a tarefa" id="tarefa" required>
+        <select name="" id="categoria">
+            <option value="trabalho">Trabalho</option>
+            <option value="casa">Casa</option>
+        </select>
+        <button class="salvar" onclick="salvarTarefa()">Salvar tarefa</button>
+        <!-- </form> -->
+
+        <ol id="listaDeTarefas">
+
+        </ol>
+
+        <script>
+            const olHTML = document.getElementById("listaDeTarefas")
+
+            async function baixarTarefas() {
+                var tarefas = await fetch("http://localhost:8080/tarefas") //faz a conexão
+                var listaDeTarefas = await tarefas.json() //converte a resposta para JSON
+
+                olHTML.innerHTML = ""
+                listaDeTarefas.forEach((tarefa, index) => {
+                    const li = document.createElement("li")
+                    if (tarefa.categoria == "casa"){
+                      li.innerHTML =  `🏠<span>${tarefa.tarefa}</span><button class="excluir" onclick='excluirTarefa(${tarefa.id})'>🗑️</button>`
+                    }
+                   else if (tarefa.categoria == "trabalho"){
+                      li.innerHTML =  `💻<span>${tarefa.tarefa}</span><button class="excluir" onclick='excluirTarefa(${tarefa.id})'>🗑️</button>`
+                   }
+                    olHTML.appendChild(li)
+                })
+            }
+
+            async function salvarTarefa() {
+                let tarefa = document.getElementById("tarefa").value
+                let categoria = document.getElementById("categoria").value
+
+                let req = await fetch("http://localhost:8080/tarefa", {
+                    method: "POST", // metodo HTTP POST
+                    headers: {
+                        "Content-Type": "application/json",//Especifica que o conteudo é um OBJ JS
+                    },
+                    body: JSON.stringify({ tarefa ,categoria })
+                    //converte o VALUE recebido do INPUT para o CORPO DA REQUISICAO
+                })
+                baixarTarefas()
+            }
+
+            async function excluirTarefa(index) {
+                let req = await fetch("http://localhost:8080/tarefa/" + index,
+                    { method: "DELETE" })
+                baixarTarefas()
+            }
+
+            baixarTarefas()
+
+
+        </script>
+    </div>
+</body>
+
+</html>

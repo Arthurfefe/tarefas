@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+
+body{
+    background-image: url(corna.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0;
+    margin: 15px;
+}
+
+h1{
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    color: aliceblue;
+    
+}
+    
+
+
+ol>li{
+text-align: center;
+color: aliceblue;
+align-items: center;
+display: flex;
+flex-direction: column;
+font-family: "Dancing Script", cursive;
+font-size: xx-large;
+border: 0;
+margin: 30px;
+margin-bottom: 40px;
+padding: 0px 0px 0px 0px;
+}
+
+input{
+    background-color: rgb(0, 0, 0);
+    color: black;
+
+  border: 3px solid blanchedalmond;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+button{
+    background-color: rgb(0, 0, 0);
+    color: rgb(241, 241, 241);
+    border: 0;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  border: 3px solid blanchedalmond;
+}
+
+.excluir{
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+   
+}
+select{
+    border-radius: 15px;
+   cursor: pointer;
+   color: white;
+   background-color: black;
+   font-family: "Special Gothic Expanded One", sans-serif;
+   font-weight: 100;
+   font-style: normal;
+   border: 3px solid blanchedalmond;
+}
+
+button:hover{
+    background-color: rgb(0, 0, 0);
+}
+
+
+
+::placeholder{
+    color: rgb(255, 255, 255);
+}
