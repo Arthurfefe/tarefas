@@ -125,7 +125,7 @@ button:hover{
             const olHTML = document.getElementById("listaDeTarefas")
 
             async function baixarTarefas() {
-                var tarefas = await fetch("http://localhost:8080/tarefas") //faz a conexão
+                var tarefas = await fetch("https://tarefas-6jt2.onrender.com") //faz a conexão
                 var listaDeTarefas = await tarefas.json() //converte a resposta para JSON
 
                 olHTML.innerHTML = ""
@@ -145,7 +145,7 @@ button:hover{
                 let tarefa = document.getElementById("tarefa").value
                 let categoria = document.getElementById("categoria").value
 
-                let req = await fetch("http://localhost:8080/tarefa", {
+                let req = await fetch("https://tarefas-6jt2.onrender.com", {
                     method: "POST", // metodo HTTP POST
                     headers: {
                         "Content-Type": "application/json",//Especifica que o conteudo é um OBJ JS
@@ -157,7 +157,7 @@ button:hover{
             }
 
             async function excluirTarefa(index) {
-                let req = await fetch("http://localhost:8080/tarefa/" + index,
+                let req = await fetch("https://tarefas-6jt2.onrender.com" + index,
                     { method: "DELETE" })
                 baixarTarefas()
             }
